@@ -1,10 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "https://run.mocky.io/v3/a67edc87-49c7-4822-9cb4-e2ef94cb3099";
+const RESTAURANT_NAMES_URL =
+  "https://run.mocky.io/v3/a67edc87-49c7-4822-9cb4-e2ef94cb3099";
+const RESTAURANT_DATA_URL =
+  "https://run.mocky.io/v3/a67edc87-49c7-4822-9cb4-e2ef94cb3099"; // Replace with the correct URL for restaurant data
 
 async function fetchRestaurantNames() {
   try {
-    const response = await axios.get(BASE_URL);
+    const response = await axios.get(RESTAURANT_NAMES_URL);
     return response.data;
   } catch (error) {
     console.error("Error fetching restaurant names:", error);
@@ -14,7 +17,7 @@ async function fetchRestaurantNames() {
 
 async function fetchRestaurantData() {
   try {
-    const response = await axios.get(BASE_URL);
+    const response = await axios.get(RESTAURANT_DATA_URL);
     return response.data;
   } catch (error) {
     console.error("Error fetching restaurant data:", error);
@@ -22,22 +25,4 @@ async function fetchRestaurantData() {
   }
 }
 
-async function fetchAddonsData(dishId) {
-  try {
-    const response = await fetch(
-      `http://snapittapp.snapitt.net/api/menu/30/?org=1010000001&branch_id=1000000001&menuItem=${dishId}&limit=10&offset=20&lang=en`
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("Addon Data:", data);
-    return data;
-  } catch (error) {
-    console.error("Error fetching addons data:", error);
-    return [];
-  }
-}
-
-export { fetchRestaurantNames, fetchRestaurantData, fetchAddonsData };
+export { fetchRestaurantNames, fetchRestaurantData };
